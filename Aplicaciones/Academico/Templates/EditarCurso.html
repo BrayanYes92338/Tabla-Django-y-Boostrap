@@ -1,0 +1,44 @@
+{% extends "./baseCurso.html" %}
+{%block title%} Gestion de Cursos {% endblock %}
+{%block body%}
+<div class="row">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-dismissible alert-success fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong class="text-dark">{{ message }}</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="col-md-4 offset-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h2>Editar Curso</h2>
+                <form action="{% url 'edicionCurso' curso.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombre">Nombre del Curso:</label>
+                        <input type="text" name="nombre" id="nombreCurso"  value="{{curso.nombre}}" class="form-control" required
+                            placeholder="Ingrese Nombre del Curso">
+                    </div>
+                    <div class="form-group">
+                        <label for="Credito">Creditos:</label>
+                        <input type="phone" name="creditos" id="creditoCurso" value="{{curso.creditos}}" class="form-control" required
+                            placeholder="Ingrese Credito del Curso">
+                    </div>
+                    <div class="form-group">
+                        <label for="Horas">Horas:</label>
+                        <input type="phone" name="horas" id="horasCurso" value="{{curso.horas}}" class="form-control" required
+                            placeholder="Ingrese Horas del Curso">
+                    </div>
+                    <div class="form-group py-3"> 
+                        <button type="submit" class="btn btn-success btn-block text-white">Editar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

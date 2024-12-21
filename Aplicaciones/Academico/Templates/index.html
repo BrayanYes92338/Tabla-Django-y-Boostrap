@@ -1,0 +1,75 @@
+{% extends "./baseCurso.html" %}
+{%block title%} Gestion de Cursos {% endblock %}
+{%block body%}
+<div class="row">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-dismissible alert-success fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong class="text-dark">{{ message }}</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <h2>Agregar Curso</h2>
+                <form action="agregarCurso/" method="POST"> {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombre">Nombre del Curso:</label>
+                        <input type="text" name="nombre" id="nombreCurso" class="form-control" required
+                            placeholder="Ingrese Nombre del Curso">
+                    </div>
+                    <div class="form-group">
+                        <label for="Credito">Creditos:</label>
+                        <input type="phone" name="creditos" id="creditoCurso" class="form-control" required
+                            placeholder="Ingrese Credito del Curso">
+                    </div>
+                    <div class="form-group">
+                        <label for="Horas">Horas:</label>
+                        <input type="phone" name="horas" id="horasCurso" class="form-control" required
+                            placeholder="Ingrese Horas del Curso">
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h2 class="text-success">Cursos</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre Curso</th>
+                        <th>Creditos</th>
+                        <th>Horas</th>
+                        <th colspan="2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for curso in cursos %}
+                    <tr>
+                        <td>{{curso.id}}</td>
+                        <td>{{curso.nombre}}</td>
+                        <td>{{curso.creditos}}</td>
+                        <td>{{curso.horas}}</td>
+                        <td>
+                            <a href="editarCurso/{{curso.id}}" class="btn btn-info text-white btn-action btn-editar"><i
+                                    class="fa fa-pencil-alt"></i></a>
+                            <a href="eliminarCurso/{{curso.id}}" class="btn btn-danger btn-borrar"><i
+                                    class="fa fa-trash"></i></a>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{%endblock%}
